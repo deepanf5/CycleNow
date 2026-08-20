@@ -6,5 +6,11 @@ export interface UserInfo {
 export interface RegisterResponseI {
   message: string;
   token: string;
-  userinfo: UserInfo;
+  userInfo: UserInfo;
+  status: number;
+}
+
+export interface UserLoginI {
+  email: string;
+  password: string;
 }

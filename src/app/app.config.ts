@@ -18,6 +18,11 @@ import {
   lucideChevronUp,
   lucideChevronRight,
   lucideBike,
+  lucideRouteOff,
+  lucideSpotlight,
+  lucideWrench,
+  lucideWind,
+  lucideSignpost,
 } from '@ng-icons/lucide';
 import { provideSpartanHlm } from '@spartan-ng/helm/utils';
 import { Auth } from './services/auth/auth';
@@ -41,6 +46,11 @@ export const appConfig: ApplicationConfig = {
       lucideChevronUp,
       lucideChevronRight,
       lucideBike,
+      lucideRouteOff,
+      lucideSpotlight,
+      lucideWrench,
+      lucideWind,
+      lucideSignpost,
     }),
     provideAppInitializer(initializeAuth),
   ],

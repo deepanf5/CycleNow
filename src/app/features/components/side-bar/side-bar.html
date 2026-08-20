@@ -1,17 +1,24 @@
 <div hlmSidebarWrapper>
   <hlm-sidebar>
     <div hlmSidebarHeader>
-      <img src="/bike.svg" class="w-10" alt="" />
+      <ul hlmSidebarMenu>
+        <li hlmSidebarMenuItem>
+          <button class="text-sm h-10 p-0 m-0" hlmSidebarMenuButton>
+            <img src="/bike.svg" class="w-8 ml-2" alt="" />
+            <h2 class="font-bold text-lg ml-4">Cycle Now</h2>
+          </button>
+        </li>
+      </ul>
     </div>
     <div hlmSidebarContent>
       <div hlmSidebarContent>
         <div hlmSidebarGroup>
-          <div hlmSidebarGroupLabel class="text-md font-bold">Dashboard</div>
+          <!-- <div hlmSidebarGroupLabel class="text-md font-bold">Dashboard</div> -->
           <div hlmSidebarGroupContent>
             <ul hlmSidebarMenu>
               @for (item of _items; track item.title) {
                 <hlm-collapsible [expanded]="item.defaultOpen" class="group/collapsible">
-                  <li hlmSidebarMenuItem>
+                  <li hlmSidebarMenuItem class="pt-3">
                     <button
                       hlmCollapsibleTrigger
                       hlmSidebarMenuButton
@@ -48,7 +55,7 @@
       <ul hlmSidebarMenu>
         <li hlmSidebarMenuItem>
           <button class="text-sm" hlmSidebarMenuButton [hlmDropdownMenuTrigger]="menu">
-            Select Workspace
+            Settings
             <ng-icon name="lucideChevronUp" class="ml-auto" />
           </button>
           <ng-template #menu>

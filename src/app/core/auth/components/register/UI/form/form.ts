@@ -1,3 +1,4 @@
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   email,
   form,
@@ -8,7 +9,7 @@ import {
   submit,
   maxLength,
 } from '@angular/forms/signals';
-import { Component, computed, signal, inject, PLATFORM_ID } from '@angular/core';
+import { Component, computed, signal, inject, PLATFORM_ID, DestroyRef } from '@angular/core';
 import { Auth } from '../../../../../../services/auth/auth';
 
 import { HlmButton } from '@spartan-ng/helm/button';
@@ -51,6 +52,8 @@ export class Form {
   router = inject(Router);
   authService = inject(Auth);
   platformId = inject(PLATFORM_ID);
+  destoryRef = inject(DestroyRef);
+
   protected inputType = signal<'text' | 'password'>('password');
   protected inputTypeforConfirm = signal<'text' | 'password'>('password');
   readonly icon = computed(() => (this.inputType() === 'password' ? 'lucideEye' : 'lucideEyeOff'));
@@ -106,20 +109,23 @@ export class Form {
 
     submit(this.registerform, async () => {
       const formData = this.registerform().value();
-      console.log(formData);
-      this.authService.registerUser(formData).subscribe({
-        next: (res) => {
-          if (isPlatformBrowser(this.platformId)) {
-            localStorage.setItem('TOKEN', res.token);
-          }
-          this.toastMessage(res.message);
-          this.registerform().reset(this.initialState);
-          this.router.navigate(['/dashboard']);
-        },
-        error: (err) => {
-          console.error(err);
-        },
-      });
+      this.authService
+        .registerUser(formData)
+        .pipe(takeUntilDestroyed(this.destoryRef))
+        .subscribe({
+          next: (res) => {
+            if (isPlatformBrowser(this.platformId)) {
+              localStorage.setItem('TOKEN', res.token);
+              localStorage.setItem('USERINFO', JSON.stringify(res.userInfo));
+            }
+            this.toastMessage(res.message);
+            this.registerform().reset(this.initialState);
+            this.router.navigate(['/dashboard']);
+          },
+          error: (err) => {
+            console.error(err);
+          },
+        });
     });
   }
 
