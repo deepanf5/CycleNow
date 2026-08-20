@@ -1,0 +1,98 @@
+<form novalidate (submit)="onSubmit($event)">
+  <div class="mt-3">
+    <!-- userName field -->
+    @let userName = registerform.userName;
+    <hlm-field class="mt-3">
+      <label class="text-sm font-semibold" hlmFieldLabel for="userName">UserName </label>
+      <input
+        [formField]="userName"
+        class="rounded-sm"
+        hlmInput
+        type="text"
+        placeholder="userName"
+        autocomplete="username"
+      />
+      @if (userName().invalid() && (userName().touched() || userName().dirty())) {
+        @for (error of userName().errors(); track error.kind) {
+          <p class="text-sm text-red-600">{{ error.message }}</p>
+        }
+      }
+    </hlm-field>
+
+    <!-- Email field  -->
+    @let email = registerform.email;
+
+    <hlm-field class="mt-3">
+      <label class="text-sm font-semibold" hlmFieldLabel for="email">Email </label>
+      <input
+        [formField]="email"
+        class="rounded-sm"
+        hlmInput
+        type="email"
+        placeholder="xyz@gmail.com"
+        autocomplete="email"
+      />
+      @if (email().invalid() && (email().touched() || email().dirty())) {
+        @for (error of email().errors(); track error.kind) {
+          <p class="text-sm text-red-600">{{ error.message }}</p>
+        }
+      }
+    </hlm-field>
+    <!-- Password field -->
+    <label class="mt-3 text-sm font-semibold" hlmFieldLabel for="password">Password </label>
+    @let password = registerform.password;
+    <hlm-input-group class="mt-2 rounded-sm">
+      <input
+        [formField]="password"
+        hlmInputGroupInput
+        [type]="inputType()"
+        placeholder="password"
+        autocomplete="current-password"
+      />
+
+      <hlm-input-group-addon align="inline-end">
+        <ng-icon class="cursor-pointer" [name]="icon()" (click)="toggle()" />
+      </hlm-input-group-addon>
+    </hlm-input-group>
+    @if (password().invalid() && (password().touched() || password().dirty())) {
+      @for (error of password().errors(); track error.kind) {
+        <p class="text-sm text-red-600">{{ error.message }}</p>
+      }
+    }
+
+    @let confirmPassword = registerform.confirmPassword;
+    <label class="mt-3 text-sm font-semibold" hlmFieldLabel for="password">Confirm Password </label>
+    <hlm-input-group class="mt-2 rounded-sm">
+      <input
+        [formField]="confirmPassword"
+        hlmInputGroupInput
+        [type]="inputTypeforConfirm()"
+        placeholder="confirm password"
+        autocomplete="current-password"
+      />
+      <hlm-input-group-addon align="inline-end">
+        <ng-icon class="cursor-pointer" [name]="iconConfirm()" (click)="toogleConfirm()" />
+      </hlm-input-group-addon>
+    </hlm-input-group>
+    @if (
+      confirmPassword().invalid() && (confirmPassword().touched() || confirmPassword().dirty())
+    ) {
+      @for (error of confirmPassword().errors(); track error.kind) {
+        <p class="text-sm text-red-600">{{ error.message }}</p>
+      }
+    }
+  </div>
+
+  <!-- Register button  -->
+  <div class="mt-4">
+    <button
+      [disabled]="registerform().submitting()"
+      class="min-w-2/2 bg-black text-amber-50 hover:bg-gray-800"
+      hlmBtn
+      variant="secondary"
+    >
+      {{ registerform().submitting() ? 'Sumitting...' : 'Register'
+      }}<ng-icon class="cursor-pointer" name="lucideArrowRight" />
+    </button>
+  </div>
+</form>

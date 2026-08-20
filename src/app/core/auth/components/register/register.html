@@ -1,0 +1,49 @@
+<!-- https://dribbble.com/shots/26373542-Sign-In-Page -->
+<section class="h-screen">
+  <div class="flex flex-col-reverse sm:flex-row lg:flex-row h-screen">
+    <section class="min-h-96 container h-screen">
+      <div class="m-2">
+        <img src="/bike.svg" class="w-10 lg:10 text-center" alt="A picture of bike" />
+      </div>
+      <div class="text-center">
+        <h1 class="text-xl font-semibold">Create your account</h1>
+        <p class="m-2">Gear up and start your cycling journey.</p>
+        <div class="p-4"></div>
+      </div>
+
+      <div class="social-login text-center mt-4">
+        <r-register-options />
+      </div>
+
+      <p class="text-center text-sm text-gray-600 mt-10 capitalize">or continue with email</p>
+
+      <r-form />
+      <!-- Register user -->
+      <div class="text-center mt-6">
+        <p>Registered User ? <em class="font-semibold not-italic">login</em></p>
+      </div>
+
+      <!-- copy rights -->
+      <div class="flex justify-between mt-6">
+        <p class="capitalize text-sm">&COPY; copy right {{ date }}</p>
+        <p class="capitalize text-sm">Terms and Conditions</p>
+      </div>
+    </section>
+    <section class="container min-h-20 lg:rounded-l-lg customBackground">
+      <div class="lg:mt-50 items-center">
+        <h1 [class]="title" class="lg:text-8xl sm:text-xl text-center font-bold text-white">
+          Build Your Rider Profile
+        </h1>
+        <p class="mt-15 text-xl text-white font-semibold">
+          Hunt down king-of-the-mountain segments, track your brutal stats, and showcase your epic
+          rides to a global community of thrill-seekers.
+        </p>
+      </div>
+      <div class="mt-5 p-6 pl-0">
+        <p [class]="quote" class="mt-3 text-sm text-white border-l-4 pl-5">
+          Your ultimate off-road adventure starts at the very next pedal
+        </p>
+      </div>
+    </section>
+  </div>
+</section>
