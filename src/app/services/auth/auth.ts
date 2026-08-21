@@ -1,16 +1,18 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, PLATFORM_ID, Service, signal } from '@angular/core';
+import { inject, PLATFORM_ID, Service } from '@angular/core';
 
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { RegisterFormI } from '../../core/auth/components/register/UI/form/form';
-import { RegisterResponseI, UserInfo, UserLoginI } from '../../models/model';
+import { RegisterResponseI, UserLoginI } from '../../models/model';
 import { isPlatformBrowser } from '@angular/common';
 import { API_URL } from '../../core/APIURL';
+import { Router } from '@angular/router';
 
 @Service()
 export class Auth {
   http = inject(HttpClient);
   platformId = inject(PLATFORM_ID);
+  router = inject(Router);
 
   registerUser(formData: RegisterFormI): Observable<RegisterResponseI> {
     return this.http.post<RegisterResponseI>(API_URL.AUTH.REGISTER, formData);
@@ -27,5 +29,10 @@ export class Auth {
       }
     }
     return of(false);
+  }
+
+  signOutUser() {
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 }

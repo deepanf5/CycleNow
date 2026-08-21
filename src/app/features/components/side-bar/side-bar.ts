@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmCollapsibleImports } from '@spartan-ng/helm/collapsible';
 import { NgIcon } from '@ng-icons/core';
+import { Auth } from '../../../services/auth/auth';
 
 @Component({
   selector: 'app-side-bar',
@@ -11,6 +12,7 @@ import { NgIcon } from '@ng-icons/core';
   styleUrl: './side-bar.css',
 })
 export class SideBar {
+  authServices = inject(Auth);
   protected readonly _items = [
     {
       title: 'Cycles',
@@ -69,4 +71,8 @@ export class SideBar {
     //   title: 'Settings',
     // },
   ];
+
+  signOut() {
+    this.authServices.signOutUser();
+  }
 }
