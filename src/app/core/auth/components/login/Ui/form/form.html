@@ -1,6 +1,6 @@
 <form class="p-2 mt-10" novalidate (submit)="onSubmit($event)">
   @let email = loginform.email;
-  <hlm-field class="mt-3 lg:w-96">
+  <hlm-field class="mt-3">
     <label class="text-sm font-semibold" hlmFieldLabel for="email">Email </label>
     <input
       [formField]="email"
@@ -20,7 +20,7 @@
   @let password = loginform.password;
 
   <label class="text-sm font-semibold mt-3" hlmFieldLabel for="password">Password </label>
-  <hlm-input-group class="mt-2 rounded-sm lg:w-96">
+  <hlm-input-group class="mt-2 rounded-sm">
     <input
       [formField]="password"
       hlmInputGroupInput
@@ -41,7 +41,7 @@
 
   <button
     [disabled]="loginform().submitting()"
-    class="mt-5 lg:w-96 bg-black text-amber-50 hover:bg-gray-800"
+    class="mt-5 min-w-2/2 bg-black text-amber-50 hover:bg-gray-800"
     hlmBtn
     variant="secondary"
   >
